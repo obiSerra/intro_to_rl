@@ -1,0 +1,8 @@
+box2d-py==2.3.5
+gym==0.21.0
+numpy==1.23.5
+pyglet==1.5.27
+stable-baselines3==1.6.2
+tensorboard==2.11.0
+torch==1.13.0
+tqdm==4.64.1
