@@ -10,8 +10,8 @@ from torch import nn as nn
 
 
 if __name__ == "__main__":
-    env = make_vec_env("CarRacing-v0", n_envs=4)
-    model_name = "ppo_car_racing_custom"
+    env = make_vec_env("CarRacing-v1", n_envs=4)
+    model_name = "ppo_car_racing_base_v1"
     # normal reset, this changes the colour scheme by default
     obs = env.reset()
 
@@ -48,25 +48,13 @@ if __name__ == "__main__":
     model_params = {
         # "batch_size": 60,
         # "n_steps": 1200,
-        "policy_kwargs": policy_kwargs
+        # "policy_kwargs": policy_kwargs
         # "clip_range": 0.3,
     }
 
-    model = PPO("CnnPolicy", env, verbose=0, tensorboard_log="sb3_log", **model_params)
+    model = PPO("CnnPolicy", env, verbose=0, tensorboard_log="sb3_logs", **model_params)
 
     model.learn(total_timesteps=100_000, tb_log_name=model_name, reset_num_timesteps=False)
 
-    print("training DONE!!!!!")
-
     model.save(model_name)
-    del model
-
-    # env = gym.make('CarRacing-v0')
-    # obs = env.reset()
-
-    # model = PPO.load("ppo_car_racing", env)
-
-    # while True:
-    #     action, _states = model.predict(obs.copy())
-    #     obs, rewards, dones, info = env.step(action)
-    #     env.render()
+    print("training DONE!!!!!")
